@@ -28,4 +28,13 @@ public class Muffin extends ConsumibleDulce {
     public void setIntegral(boolean integral) {
         this.integral = integral;
     }
+
+    public Muffin(boolean celiaco, boolean diabetico, boolean integral, double precio, String sabor) {
+        this.celiaco = celiaco;
+        this.diabetico = diabetico;
+        this.integral = integral;
+        this.precio = precio;
+        this.sabor = sabor;
+    }
+
 }

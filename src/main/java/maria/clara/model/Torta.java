@@ -1,31 +1,20 @@
 package maria.clara.model;
 
 public class Torta extends ConsumibleDulce {
-    private int peso;
-    private boolean dulce;
-    private boolean salado;
+    private double peso;
 
-    public int getPeso() {
+    public double getPeso() {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(double peso) {
         this.peso = peso;
     }
 
-    public boolean isDulce() {
-        return dulce;
-    }
 
-    public void setDulce(boolean dulce) {
-        this.dulce = dulce;
-    }
-
-    public boolean isSalado() {
-        return salado;
-    }
-
-    public void setSalado(boolean salado) {
-        this.salado = salado;
+    public Torta(double peso, double precio, String sabor) {
+        this.peso = peso;
+        this.precio = precio;
+        this.sabor = sabor;
     }
 }

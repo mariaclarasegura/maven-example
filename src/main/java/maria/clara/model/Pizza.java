@@ -10,4 +10,10 @@ public class Pizza  extends ConsumibleSalado{
     public void setPorciones(int porciones) {
         this.porciones = porciones;
     }
+
+    public Pizza(int porciones, double precio, String sabor) {
+        this.porciones = porciones;
+        this.precio=precio;
+        this.sabor=sabor;
+    }
 }
