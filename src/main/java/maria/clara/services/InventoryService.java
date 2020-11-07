@@ -1,16 +1,16 @@
-package maria.clara.servicios;
+package maria.clara.services;
 
-import maria.clara.database.BaseDeDato;
+import maria.clara.database.Database;
 import maria.clara.model.Consumible;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ServicioInventario {
-    private BaseDeDato baseDeDato = new BaseDeDato();
+public class InventoryService {
+    private Database database = new Database();
 
     public int obtenerInventario(String consumible) {
-        List<Consumible> listadoParaServicio = baseDeDato.getListadoDeProductos();
+        List<Consumible> listadoParaServicio = database.getListadoDeProductos();
         int contador = 0;
         for (Consumible alimento : listadoParaServicio) {
             if (alimento.getClass().getSimpleName().equals(consumible)) {
@@ -21,7 +21,7 @@ public class ServicioInventario {
     }
 
     public ArrayList<Consumible> obtenerListado(String consumible) {
-        List<Consumible> listadoParaServicio = baseDeDato.getListadoDeProductos();
+        List<Consumible> listadoParaServicio = database.getListadoDeProductos();
         ArrayList<Consumible> consumibleElegido = new ArrayList<>();
         for (Consumible alimento : listadoParaServicio) {
             if (alimento.getClass().getSimpleName().equals(consumible)) {
@@ -29,5 +29,10 @@ public class ServicioInventario {
             }
         }
         return consumibleElegido;
+    }
+
+
+    public List<Consumible> obtenerListado() {
+        return database.getListadoDeProductos();
     }
 }

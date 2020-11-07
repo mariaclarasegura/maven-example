@@ -5,10 +5,10 @@ import maria.clara.model.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BaseDeDato {
+public class Database {
     private List<Consumible> listadoDeProductos = new ArrayList<Consumible>();
 
-    public BaseDeDato() {
+    public Database() {
         listadoDeProductos.add(new Hamburguesa(true, true, true, 100, "Hongos"));
         listadoDeProductos.add(new Hamburguesa(false, false, false, 100, "Porotos"));
         listadoDeProductos.add(new Hamburguesa(false, true, false, 100, "Avena"));

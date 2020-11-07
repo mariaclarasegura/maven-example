@@ -1,11 +1,11 @@
-package maria.clara.servicios;
+package maria.clara.services;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class ServicioInventarioTest {
+class InventoryServiceTest {
 
-    ServicioInventario servicioParaTest = new ServicioInventario();
+    InventoryService servicioParaTest = new InventoryService();
 
     @Test
     public void getInventarioForHamburguesaEquals3() {
