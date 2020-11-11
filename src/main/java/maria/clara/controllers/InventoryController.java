@@ -3,7 +3,7 @@ package maria.clara.controllers;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.javalin.Javalin;
 import maria.clara.Server;
-import maria.clara.model.Consumible;
+import maria.clara.model.Edible;
 import maria.clara.services.InventoryService;
 import maria.clara.utils.JsonUtils;
 
@@ -15,15 +15,15 @@ public class InventoryController {
 
     public InventoryController() throws JsonProcessingException {
         Javalin app = Server.getApp();
-        app.get("/hamburguesa", ctx -> ctx.result(String.valueOf(inventario.obtenerInventario("Hamburguesa"))));
+        app.get("/hamburguesa", ctx -> ctx.result(String.valueOf(inventario.obtainInventory("Hamburguesa"))));
         app.get("/listado/:consumible", ctx -> {
                     String param = ctx.pathParam("consumible");
-                    ArrayList<Consumible> listado = inventario.obtenerListado(param);
+                    ArrayList<Edible> listado = inventario.obtainList(param);
                     ctx.result(JsonUtils.toJson(listado));
                 }
         );
         app.get("/listado", ctx -> {
-                    List<Consumible> listado = inventario.obtenerListado();
+                    List<Edible> listado = inventario.obtainList();
                     ctx.result(JsonUtils.toJson(listado));
                 }
         );

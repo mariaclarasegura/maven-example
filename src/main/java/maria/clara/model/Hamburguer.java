@@ -1,6 +1,6 @@
 package maria.clara.model;
 
-public class Muffin extends SweetEdible {
+public class Hamburguer extends SavoryEdible {
     private boolean celiac;
     private boolean diabetic;
     private boolean wholemeal;
@@ -29,12 +29,11 @@ public class Muffin extends SweetEdible {
         this.wholemeal = wholemeal;
     }
 
-    public Muffin(boolean celiac, boolean diabetic, boolean wholemeal, double price, String flavor) {
+    public Hamburguer(boolean celiac, boolean diabetic, boolean wholemeal, double price, String flavor) {
         this.celiac = celiac;
         this.diabetic = diabetic;
         this.wholemeal = wholemeal;
         this.price = price;
         this.flavor = flavor;
     }
-
 }

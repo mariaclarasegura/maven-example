@@ -1,7 +1,7 @@
 package maria.clara.services;
 
 import maria.clara.database.Database;
-import maria.clara.model.Consumible;
+import maria.clara.model.Edible;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,30 +9,30 @@ import java.util.List;
 public class InventoryService {
     private Database database = new Database();
 
-    public int obtenerInventario(String consumible) {
-        List<Consumible> listadoParaServicio = database.getListadoDeProductos();
-        int contador = 0;
-        for (Consumible alimento : listadoParaServicio) {
-            if (alimento.getClass().getSimpleName().equals(consumible)) {
-                contador++;
+    public int obtainInventory(String edible) {
+        List<Edible> listForService = database.getEdiblesList();
+        int counter = 0;
+        for (Edible meal : listForService) {
+            if (meal.getClass().getSimpleName().equals(edible)) {
+                counter++;
             }
         }
-        return contador;
+        return counter;
     }
 
-    public ArrayList<Consumible> obtenerListado(String consumible) {
-        List<Consumible> listadoParaServicio = database.getListadoDeProductos();
-        ArrayList<Consumible> consumibleElegido = new ArrayList<>();
-        for (Consumible alimento : listadoParaServicio) {
-            if (alimento.getClass().getSimpleName().equals(consumible)) {
-                consumibleElegido.add(alimento);
+    public ArrayList<Edible> obtainList(String edible) {
+        List<Edible> listForService = database.getEdiblesList();
+        ArrayList<Edible> chosenEdible = new ArrayList<>();
+        for (Edible meal : listForService) {
+            if (meal.getClass().getSimpleName().equals(edible)) {
+                chosenEdible.add(meal);
             }
         }
-        return consumibleElegido;
+        return chosenEdible;
     }
 
 
-    public List<Consumible> obtenerListado() {
-        return database.getListadoDeProductos();
+    public List<Edible> obtainList() {
+        return database.getEdiblesList();
     }
 }

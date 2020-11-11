@@ -1,29 +1,30 @@
 package maria.clara.services;
+
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class InventoryServiceTest {
 
-    InventoryService servicioParaTest = new InventoryService();
+    InventoryService serviceForTest = new InventoryService();
 
     @Test
-    public void getInventarioForHamburguesaEquals3() {
-        assertEquals(3, servicioParaTest.obtenerInventario("Hamburguesa"));
+    public void getInventoryForHamburguerEquals3() {
+        assertEquals(3, serviceForTest.obtainInventory("Hamburguer"));
     }
 
     @Test
-    public void getInventarioForMuffinEquals3() {
-        assertEquals(3, servicioParaTest.obtenerInventario("Muffin"));
+    public void getInventoryForMuffinEquals3() {
+        assertEquals(3, serviceForTest.obtainInventory("Muffin"));
     }
 
     @Test
-    public void getInventarioForTortaEquals1() {
-        assertEquals(1, servicioParaTest.obtenerInventario("Torta"));
+    public void getInventoryForCakeEquals1() {
+        assertEquals(1, serviceForTest.obtainInventory("Cake"));
     }
 
     @Test
-    public void getInventarioForPizzaEquals2() {
-        assertEquals(2, servicioParaTest.obtenerInventario("Pizza"));
+    public void getInventoryForPizzaEquals2() {
+        assertEquals(2, serviceForTest.obtainInventory("Pizza"));
     }
 }
