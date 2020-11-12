@@ -9,14 +9,14 @@ public class Database {
     private List<Edible> ediblesList = new ArrayList<Edible>();
 
     public Database() {
-        ediblesList.add(new Hamburguer(true, true, true, 100, "Hongos"));
-        ediblesList.add(new Hamburguer(false, false, false, 100, "Porotos"));
-        ediblesList.add(new Hamburguer(false, true, false, 100, "Avena"));
+        ediblesList.add(new Hamburger(true, true, true, 100, "Mushrooms"));
+        ediblesList.add(new Hamburger(false, false, false, 100, "Beans"));
+        ediblesList.add(new Hamburger(false, true, false, 100, "Oat"));
         ediblesList.add(new Cake(0.5, 600, "Chocolate"));
         ediblesList.add(new Muffin(true, true, true, 50, "Chocolate"));
-        ediblesList.add(new Muffin(true, true, true, 50, "Vainilla"));
-        ediblesList.add(new Muffin(false, false, false, 50, "Frutilla"));
-        ediblesList.add(new Pizza(8, 400, "Muzzarella"));
+        ediblesList.add(new Muffin(true, true, true, 50, "Vanilla"));
+        ediblesList.add(new Muffin(false, false, false, 50, "Strawberry"));
+        ediblesList.add(new Pizza(8, 400, "Mozzarella"));
         ediblesList.add(new Pizza(6, 300, "Capresse"));
     }
 

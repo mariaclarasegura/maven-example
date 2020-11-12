@@ -11,20 +11,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryController {
-    private InventoryService inventario = new InventoryService();
+    private InventoryService inventory = new InventoryService();
 
     public InventoryController() throws JsonProcessingException {
         Javalin app = Server.getApp();
-        app.get("/hamburguesa", ctx -> ctx.result(String.valueOf(inventario.obtainInventory("Hamburguesa"))));
-        app.get("/listado/:consumible", ctx -> {
-                    String param = ctx.pathParam("consumible");
-                    ArrayList<Edible> listado = inventario.obtainList(param);
-                    ctx.result(JsonUtils.toJson(listado));
+        app.get("/hamburger", ctx -> ctx.result(String.valueOf(inventory.obtainInventory("Hamburger"))));
+        app.get("/list/:edible", ctx -> {
+                    String param = ctx.pathParam("edible");
+                    ArrayList<Edible> list = inventory.obtainList(param);
+                    ctx.result(JsonUtils.toJson(list));
                 }
         );
-        app.get("/listado", ctx -> {
-                    List<Edible> listado = inventario.obtainList();
-                    ctx.result(JsonUtils.toJson(listado));
+        app.get("/list", ctx -> {
+                    List<Edible> list = inventory.obtainList();
+                    ctx.result(JsonUtils.toJson(list));
                 }
         );
     }

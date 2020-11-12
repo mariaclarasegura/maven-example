@@ -9,8 +9,8 @@ class InventoryServiceTest {
     InventoryService serviceForTest = new InventoryService();
 
     @Test
-    public void getInventoryForHamburguerEquals3() {
-        assertEquals(3, serviceForTest.obtainInventory("Hamburguer"));
+    public void getInventoryForHamburgerEquals3() {
+        assertEquals(3, serviceForTest.obtainInventory("Hamburger"));
     }
 
     @Test
