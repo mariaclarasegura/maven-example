@@ -15,14 +15,14 @@ public class InventoryController {
 
     public InventoryController() throws JsonProcessingException {
         Javalin app = Server.getApp();
-        app.get("/hamburger", ctx -> ctx.result(String.valueOf(inventory.obtainInventory("Hamburger"))));
-        app.get("/cocinandoConEmma/list/:edible", ctx -> {
+        String basePath = "/cocinandoConEmma";
+        app.get(basePath + "/list/:edible", ctx -> {
                     String param = ctx.pathParam("edible");
                     ArrayList<Edible> list = inventory.obtainList(param);
                     ctx.result(JsonUtils.toJson(list));
                 }
         );
-        app.get("/cocinandoConEmma/list", ctx -> {
+        app.get(basePath + "/list", ctx -> {
                     List<Edible> list = inventory.obtainList();
                     ctx.result(JsonUtils.toJson(list));
                 }

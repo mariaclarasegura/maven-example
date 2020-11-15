@@ -1,13 +1,17 @@
 package maria.clara.model;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
-
-import static com.fasterxml.jackson.annotation.JsonTypeInfo.Id.NAME;
-
-@JsonTypeInfo(use = NAME, include = JsonTypeInfo.As.WRAPPER_OBJECT)
 public abstract class Edible {
+    protected String typeOfEdible = getClass().getSimpleName();
     protected double price;
     protected String flavor;
+
+    public String getTypeOfEdible() {
+        return typeOfEdible;
+    }
+
+    public void setTypeOfEdible(String typeOfEdible) {
+        this.typeOfEdible = typeOfEdible;
+    }
 
     public double getPrice() {
         return price;

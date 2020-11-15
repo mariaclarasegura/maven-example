@@ -5,10 +5,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
 public final class JsonUtils {
-    private static ObjectMapper jsonMapper = new ObjectMapper();
+    private static ObjectMapper jsonMapper = new ObjectMapper()
+            .setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 
     public static String toJson(Object object) throws JsonProcessingException {
-        return jsonMapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE).writeValueAsString(object);
+        return jsonMapper.writeValueAsString(object);
     }
 }
 
