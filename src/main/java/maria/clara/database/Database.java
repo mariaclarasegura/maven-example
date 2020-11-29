@@ -12,7 +12,6 @@ public class Database {
         ediblesList.add(new Hamburger(true, true, true, 100, "Mushrooms"));
         ediblesList.add(new Hamburger(false, false, false, 100, "Beans"));
         ediblesList.add(new Hamburger(false, true, false, 100, "Oat"));
-        ediblesList.add(new Cake(0.5, 600, "Chocolate"));
         ediblesList.add(new Muffin(true, true, true, 50, "Chocolate"));
         ediblesList.add(new Muffin(true, true, true, 50, "Vanilla"));
         ediblesList.add(new Muffin(false, false, false, 50, "Strawberry"));

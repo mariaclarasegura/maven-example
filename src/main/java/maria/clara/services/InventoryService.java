@@ -1,6 +1,7 @@
 package maria.clara.services;
 
 import maria.clara.database.Database;
+import maria.clara.exceptions.UnexistentStockException;
 import maria.clara.model.Edible;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class InventoryService {
         return counter;
     }
 
-    public ArrayList<Edible> obtainList(String edible) {
+    public ArrayList<Edible> obtainList(String edible) throws UnexistentStockException {
         List<Edible> listForService = database.getEdiblesList();
         ArrayList<Edible> chosenEdible = new ArrayList<>();
         for (Edible meal : listForService) {
@@ -28,9 +29,13 @@ public class InventoryService {
                 chosenEdible.add(meal);
             }
         }
-        return chosenEdible;
+        if (chosenEdible.isEmpty()) {
+            UnexistentStockException error  = new UnexistentStockException("No hay datos");
+            throw error;
+        } else {
+            return chosenEdible;
+        }
     }
-
 
     public List<Edible> obtainList() {
         return database.getEdiblesList();
