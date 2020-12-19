@@ -14,6 +14,7 @@ public class RestaurantDtoParserTest {
     @Test
     public void parseCorrectly() throws IOException {
         String jsonExample = "[{\"id\":\"1\",\"name\":\"Eleven Madison Park\",\"detail\":{\"location\":\"New York\",\"rating\":4,\"specialization\":[\"savory\",\"sweet\"]}}]";
+        ArrayList<RestaurantDto> result = JsonUtils.fromJsonToRestaurantDTO(jsonExample);
 
         ArrayList<String> specialization = new ArrayList<String>();
         specialization.add("savory");
@@ -22,7 +23,6 @@ public class RestaurantDtoParserTest {
 
         ArrayList<RestaurantDto> expected = new ArrayList<>();
         expected.add(new RestaurantDto("1", "Eleven Madison Park", detailDto));
-        ArrayList<RestaurantDto> result = JsonUtils.fromJsonToRestaurantDTO(jsonExample);
 
         assertEquals(expected.size(), result.size());
         assertEquals(expected.get(0).getId(), result.get(0).getId());

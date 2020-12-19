@@ -1,5 +1,6 @@
 package maria.clara.services;
 
+import maria.clara.clients.RestaurantClient;
 import maria.clara.dto.RestaurantResponseDto;
 
 import java.util.ArrayList;
@@ -7,10 +8,10 @@ import java.util.List;
 
 public class RestaurantService {
 
-    private String url = "https://my-json-server.typicode.com/emanueldamianpaz/demo/restaurants";
+    private RestaurantClient restaurantClient = new RestaurantClient();
 
-    // hacer un request a la api externa
     // transformar ese response
+    // No duplicar código => pd: te explicaré para que se usa -...-
 
     public ArrayList<RestaurantResponseDto> getRestaurants() {
         return null;
