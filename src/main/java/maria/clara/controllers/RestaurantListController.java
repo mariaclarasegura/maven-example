@@ -8,6 +8,7 @@ import java.util.List;
 import io.javalin.Javalin;
 import maria.clara.Server;
 import maria.clara.dto.RestaurantResponseDto;
+import maria.clara.exceptions.EdibleNotFoundException;
 import maria.clara.exceptions.UnexistentStockException;
 import maria.clara.services.RestaurantService;
 import maria.clara.utils.JsonUtils;
@@ -26,7 +27,7 @@ public class RestaurantListController implements Serializable {
 
         app.get(basePath + "/restaurants", ctx ->
                 {
-                    ArrayList<RestaurantResponseDto> response = restaurantService.getRestaurants();
+                    ArrayList<RestaurantResponseDto> response = restaurantService.getRestaurantListOrdered();
                     try {
                         ctx.result(JsonUtils.toJson(response));
                     } catch (UnexistentStockException stockException) {
@@ -36,27 +37,22 @@ public class RestaurantListController implements Serializable {
                 }
         );
 
-        app.get(basePath + "/restaurants/savory", ctx ->
-                {
-                    List<RestaurantResponseDto> response = restaurantService.findSavorySpecializedRestaurants();
+        app.get(basePath + "/restaurants", ctx -> {
+                    String param = ctx.pathParam("edible");
 
                     try {
+                        if (param != "sweet" && param != "savory") {
+                            throw new EdibleNotFoundException("Edible " + param + " not exists ");
+                        }
+
+                        List<RestaurantResponseDto> response = restaurantService.findRestaurantsBySpecialization(param);
                         ctx.result(JsonUtils.toJson(response));
                     } catch (UnexistentStockException stockException) {
                         log.warn(stockException.getMessage(), stockException);
                         ctx.result("No hay datos");
-                    }
-                }
-        );
-        app.get(basePath + "/restaurants/sweet", ctx ->
-                {
-                    List<RestaurantResponseDto> response = restaurantService.findSweetSpecializedRestaurants();
-
-                    try {
-                        ctx.result(JsonUtils.toJson(response));
-                    } catch (UnexistentStockException stockException) {
-                        log.warn(stockException.getMessage(), stockException);
-                        ctx.result("No hay datos");
+                    } catch (EdibleNotFoundException exception) {
+                        log.warn(exception.getMessage(), exception);
+                        ctx.result("No existe ese sabor");
                     }
                 }
         );

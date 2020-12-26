@@ -26,7 +26,6 @@ public class RestaurantClient {
     public ArrayList<RestaurantDto> getRestaurant() throws IOException, JsonMappingException {
         Request request = new Request.Builder().url(url).build();
 
-
         try (Response response = client.newCall(request).execute()) {
             return JsonUtils.fromJsonToRestaurantDTO(response.body().string());
         }

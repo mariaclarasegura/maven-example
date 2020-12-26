@@ -1,6 +1,8 @@
 package maria.clara.services;
 
+import com.fasterxml.jackson.databind.JsonMappingException;
 import maria.clara.clients.RestaurantClient;
+import maria.clara.dto.RestaurantDto;
 import maria.clara.dto.RestaurantResponseDto;
 
 import java.io.IOException;
@@ -17,30 +19,41 @@ public class RestaurantService {
     public RestaurantService() throws IOException {
     }
 
-    // transformar ese response
-    // No duplicar código => pd: te explicaré para que se usa -...-
+    public List<RestaurantResponseDto> getRestaurantListOrdered() throws IOException, JsonMappingException {
+        List<RestaurantResponseDto> listOfRestaurantsOrdered = new ArrayList<>();
+        ArrayList<RestaurantDto> response = restaurantClient.getRestaurant();
 
-    private ArrayList<RestaurantResponseDto> listOfRestaurantsOrdered = new ArrayList<RestaurantResponseDto>();
+        for (RestaurantDto item : response) {
+            listOfRestaurantsOrdered.add(
+                    new RestaurantResponseDto(item.getName(), item.getDetail().getLocation(), item.getDetail().getRating(), item.getDetail().getSpecialization())
+            );
+        }
 
-    public ArrayList<RestaurantResponseDto> getRestaurants() {
         Collections.sort(listOfRestaurantsOrdered, new Comparator<RestaurantResponseDto>() {
             @Override
             public int compare(RestaurantResponseDto o2, RestaurantResponseDto o1) {
                 return Integer.valueOf(o2.getRating()).compareTo(o1.getRating());
             }
         });
+
+     /* --- With lambda expressions
+
+        listOfRestaurantsOrdered = response
+               .stream()
+               .map(item -> new RestaurantResponseDto(item.getName(), item.getDetail().getLocation(), item.getDetail().getRating(), item.getDetail().getSpecialization()))
+               .sorted((o2, o1) -> Integer.valueOf(o2.getRating()).compareTo(o1.getRating()))
+               .collect(Collectors.toList());
+     */
         return listOfRestaurantsOrdered;
     }
 
-    public List<RestaurantResponseDto> findSavorySpecializedRestaurants() {
-        List<RestaurantResponseDto> savoryEdibleRestaurants = listOfRestaurantsOrdered.stream().filter(restaurantResponseDto -> restaurantResponseDto.getSpecialization().contains("savory")).collect(Collectors.toList());
+    public List<RestaurantResponseDto> findRestaurantsBySpecialization(String edible) throws IOException, JsonMappingException {
+        List<RestaurantResponseDto> savoryEdibleRestaurants = getRestaurantListOrdered()
+                .stream()
+                .filter(restaurantResponseDto -> restaurantResponseDto.getSpecialization().contains(edible))
+                .collect(Collectors.toList());
+
         return savoryEdibleRestaurants;
-    }
-
-    public List<RestaurantResponseDto> findSweetSpecializedRestaurants() {
-
-        List<RestaurantResponseDto> sweetEdibleRestaurants = listOfRestaurantsOrdered.stream().filter(restaurantResponseDto -> restaurantResponseDto.getSpecialization().contains("sweet")).collect(Collectors.toList());
-        return sweetEdibleRestaurants;
     }
 
 }
