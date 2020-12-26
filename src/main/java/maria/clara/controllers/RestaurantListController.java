@@ -2,13 +2,11 @@ package maria.clara.controllers;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
+import java.util.List;
 
 import io.javalin.Javalin;
 import maria.clara.Server;
-import maria.clara.dto.RestaurantDto;
 import maria.clara.dto.RestaurantResponseDto;
 import maria.clara.exceptions.UnexistentStockException;
 import maria.clara.services.RestaurantService;
@@ -22,7 +20,7 @@ public class RestaurantListController implements Serializable {
     private Logger log = LoggerFactory.getLogger(RestaurantListController.class);
     private RestaurantService restaurantService = new RestaurantService();
 
-    public RestaurantListController() {
+    public RestaurantListController() throws IOException {
         Javalin app = Server.getApp();
         String basePath = "/cocinandoConEmma";
 
@@ -38,11 +36,21 @@ public class RestaurantListController implements Serializable {
                 }
         );
 
-        app.get(basePath + "/restaurants", ctx ->
-
+        app.get(basePath + "/restaurants/savory", ctx ->
                 {
-                    String param = ctx.pathParam("edible");
-                    ArrayList<RestaurantResponseDto> response = restaurantService.findRestaurantsBySpecialization(param);
+                    List<RestaurantResponseDto> response = restaurantService.findSavorySpecializedRestaurants();
+
+                    try {
+                        ctx.result(JsonUtils.toJson(response));
+                    } catch (UnexistentStockException stockException) {
+                        log.warn(stockException.getMessage(), stockException);
+                        ctx.result("No hay datos");
+                    }
+                }
+        );
+        app.get(basePath + "/restaurants/sweet", ctx ->
+                {
+                    List<RestaurantResponseDto> response = restaurantService.findSweetSpecializedRestaurants();
 
                     try {
                         ctx.result(JsonUtils.toJson(response));
