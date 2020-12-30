@@ -7,8 +7,10 @@ import java.util.List;
 
 import io.javalin.Javalin;
 import maria.clara.Server;
+import maria.clara.clients.RestaurantClientImpl;
 import maria.clara.dto.RestaurantResponseDto;
 import maria.clara.exceptions.EdibleNotFoundException;
+import maria.clara.exceptions.HttpRequestFailureException;
 import maria.clara.exceptions.UnexistentStockException;
 import maria.clara.services.RestaurantService;
 import maria.clara.utils.JsonUtils;
@@ -19,7 +21,7 @@ import org.slf4j.LoggerFactory;
 public class RestaurantListController implements Serializable {
 
     private Logger log = LoggerFactory.getLogger(RestaurantListController.class);
-    private RestaurantService restaurantService = new RestaurantService();
+    private RestaurantService restaurantService = new RestaurantService(new RestaurantClientImpl());
 
     public RestaurantListController() throws IOException {
         Javalin app = Server.getApp();
@@ -27,12 +29,14 @@ public class RestaurantListController implements Serializable {
 
         app.get(basePath + "/restaurants", ctx ->
                 {
-                    ArrayList<RestaurantResponseDto> response = restaurantService.getRestaurantListOrdered();
+                    List<RestaurantResponseDto> response = restaurantService.getRestaurantListOrdered();
                     try {
                         ctx.result(JsonUtils.toJson(response));
                     } catch (UnexistentStockException stockException) {
                         log.warn(stockException.getMessage(), stockException);
                         ctx.result("No hay datos");
+                    } catch (HttpRequestFailureException httpRequestFailureException){
+                        ctx.result("Hubo un error");
                     }
                 }
         );

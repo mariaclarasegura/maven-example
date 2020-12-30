@@ -6,14 +6,14 @@ import java.io.IOException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RestaurantClientTest {
+class RestaurantClientImplTest {
 
     @Test
     public void getRestaurantFromValidRequest() throws IOException {
-        RestaurantClient restaurantClient = new RestaurantClient();
+        RestaurantClientImpl restaurantClientImpl = new RestaurantClientImpl();
 
         assertDoesNotThrow(() -> {
-            restaurantClient.getRestaurant();
+            restaurantClientImpl.getRestaurant();
         });
     }
 }
